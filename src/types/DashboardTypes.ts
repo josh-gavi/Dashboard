@@ -26,4 +26,18 @@ export interface OpenMeteoResponse {
     elevation: number;
     current_units: CurrentUnits;
     current: Current;
+    hourly_units: HourlyUnits;
+    hourly: Hourly;
+}
+
+export interface HourlyUnits {
+    time: string;
+    temperature_2m: string;
+    wind_speed_10m: string;
+}
+
+export interface Hourly {
+    time: string[];
+    temperature_2m: (number | null)[];
+    wind_speed_10m: (number | null)[];
 }
