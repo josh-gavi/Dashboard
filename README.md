@@ -13,7 +13,7 @@ Dashboard de Joshua Mero para Desarrollo de Aplicaciones Web y Móviles. Impleme
 - Indicadores de temperatura a 2 m, temperatura aparente, viento y humedad relativa.
 - Gráfico de líneas y tabla paginada de temperatura y viento por hora con MUI X Community.
 - Comunicación hijo → padre mediante `onOptionSelect`; datos del padre → hijos mediante props tipadas.
-- Indicador de carga, errores HTTP o de conexión y botón para reintentar.
+- Indicador de carga y mensajes de error HTTP o de conexión, como en la guía 11.
 - Cancelación de consultas anteriores al cambiar de ciudad; nunca se presentan datos de otra ciudad como actuales.
 - Diseño responsivo. El gráfico y la tabla se ocultan por debajo de 900 px, como establece la guía 08.
 
@@ -65,6 +65,8 @@ El comando original de la guía se conserva como `npm run deploy:legacy`: genera
 | `src/hooks/useFetchData.ts` | Consulta, carga, errores, cancelación y reintento |
 | `src/types/DashboardTypes.ts` | Interfaces de datos actuales, unidades y series por hora |
 | `src/utils/weather.ts` | Coordenadas, URL y validación de la respuesta |
+
+La presentación conserva el ejemplo final de la guía 11: encabezado h2, Grid con espaciado de 5, cuatro tarjetas, gráfico de 300 px y tabla de 350 px. Se restauraron los estilos de la base inicial y se retiraron el tema personalizado y los textos adicionales. La alerta «No se prevén lluvias» es el texto estático del ejercicio, no una conclusión calculada con la API.
 
 El detalle de las etapas, decisiones y comprobaciones está en [docs/desarrollo.md](docs/desarrollo.md).
 
