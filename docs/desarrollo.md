@@ -57,10 +57,11 @@ Se trabaja en la rama `desarrollo`, se integra a `main` mediante pull request y 
 4. Cambiar de ciudad rápidamente y comprobar que no aparecen respuestas de una selección anterior.
 5. Desconectar la red y cambiar de ciudad para observar el error; restaurar la red y seleccionar otra ciudad.
 
-## Ajuste de fidelidad a la guía
-
-La presentación se ajustó al App de la solución final de la guía 11 (páginas 23 y 24), al HeaderUI de la guía 08 y al IndicatorUI de la guía 10. Se retiraron Container, Paper, el pie personalizado, los textos agregados, el tema de colores, los bordes personalizados, los colores de series y el título agregado sobre la tabla. Se conservaron las dimensiones, los textos, la paginación y la distribución especificados por las guías. La alerta conserva el texto estático «No se prevén lluvias» del ejercicio. Las columnas de la tabla usan 160 px cada una. No hay botón de reintento ni tema personalizado en la interfaz; la cancelación y validación de respuestas permanecen como protección interna.
 6. Reducir la ventana a menos de 900 px para comprobar la distribución y la ocultación de tabla y gráfico.
 7. Revisar Actions para ver la validación y el despliegue de `main`.
 
 Las comprobaciones de interacción visual requieren un navegador. No se presentan como realizadas si el entorno no permite controlarlo. Los ejercicios temporales de las guías (latitud inválida, eliminación de dependencias del efecto, datos estáticos y variables sin estado) son experimentos de aprendizaje y no se conservan como fallos en la aplicación final. La documentación describe el código final y la asistencia utilizada; las reflexiones personales de la asignatura deben expresarse con las palabras del estudiante.
+
+## Ajuste de fidelidad a la guía
+
+La presentación se ajustó al App de la solución final de la guía 11 (páginas 23 y 24), al HeaderUI de la guía 08 y al IndicatorUI de la guía 10. Se retiraron Container, Paper, el pie personalizado, los textos agregados, el tema de colores, los bordes personalizados, los colores de series y el título agregado sobre la tabla. Se conservaron las dimensiones, los textos, la paginación y la distribución especificados por las guías. La alerta conserva el texto estático «No se prevén lluvias» del ejercicio. Las columnas de la tabla usan 160 px cada una. No hay botón de reintento ni tema personalizado en la interfaz; la cancelación y validación de respuestas permanecen como protección interna.
