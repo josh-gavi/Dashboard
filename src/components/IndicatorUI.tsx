@@ -10,7 +10,7 @@ export default function IndicatorUI({ title, description }: IndicatorUIProps) {
         <Card variant="outlined" sx={{ height: '100%' }}>
             <CardContent>
                 <Typography color="text.secondary" gutterBottom>{title}</Typography>
-                <Typography variant="h5" component="p" fontWeight={700}>{description}</Typography>
+                <Typography variant="h5" component="p" sx={{ fontWeight: 700 }}>{description}</Typography>
             </CardContent>
         </Card>
     );

@@ -1,26 +1,58 @@
 import { useEffect, useState } from 'react';
 import type { OpenMeteoResponse } from '../types/DashboardTypes';
+import { buildWeatherUrl, parseWeatherResponse } from '../utils/weather';
 
-const API_URL = 'https://api.open-meteo.com/v1/forecast?latitude=-2.1962&longitude=-79.8862&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m&timezone=America%2FGuayaquil';
+interface FetchResult {
+    requestKey: string;
+    data: OpenMeteoResponse | null;
+    error: string | null;
+}
 
-export default function useFetchData() {
-    const [data, setData] = useState<OpenMeteoResponse | null>(null);
+export default function useFetchData(selectedOption: string | null) {
+    const [attempt, setAttempt] = useState(0);
+    const [result, setResult] = useState<FetchResult | null>(null);
+    const city = selectedOption ?? 'guayaquil';
+    const requestKey = `${city}:${attempt}`;
 
     useEffect(() => {
         const controller = new AbortController();
+        let timedOut = false;
+        const timeout = window.setTimeout(() => {
+            timedOut = true;
+            controller.abort();
+        }, 15000);
+
         async function obtenerDatos() {
             try {
-                const respuesta = await fetch(API_URL, { signal: controller.signal });
-                if (!respuesta.ok) throw new Error(`Error ${respuesta.status} al consultar Open-Meteo`);
-                const json: OpenMeteoResponse = await respuesta.json();
-                if (!controller.signal.aborted) setData(json);
+                const respuesta = await fetch(buildWeatherUrl(city), { signal: controller.signal });
+                if (!respuesta.ok) throw new Error(`Error ${respuesta.status} al consultar Open-Meteo.`);
+                const data = parseWeatherResponse(await respuesta.json());
+                if (!controller.signal.aborted) setResult({ requestKey, data, error: null });
             } catch (error) {
-                if (!controller.signal.aborted) console.error(error);
+                if (!controller.signal.aborted || timedOut) {
+                    const message = timedOut ? 'La consulta tardó demasiado. Intenta nuevamente.'
+                        : error instanceof TypeError ? 'No se pudo conectar con Open-Meteo. Revisa tu conexión.'
+                        : error instanceof Error ? error.message : 'No se pudo consultar el clima.';
+                    setResult({ requestKey, data: null, error: message });
+                }
+            } finally {
+                window.clearTimeout(timeout);
             }
         }
-        void obtenerDatos();
-        return () => controller.abort();
-    }, []);
 
-    return data;
+        void obtenerDatos();
+        return () => {
+            window.clearTimeout(timeout);
+            controller.abort();
+        };
+    }, [city, requestKey]);
+
+    // Hide the previous city's data immediately, including the render before the effect.
+    const loading = result?.requestKey !== requestKey;
+    return {
+        data: loading ? null : result!.data,
+        loading,
+        error: loading ? null : result!.error,
+        retry: () => setAttempt(value => value + 1),
+    };
 }
