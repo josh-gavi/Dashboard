@@ -72,7 +72,7 @@ El detalle de las etapas, decisiones y comprobaciones está en [docs/desarrollo.
 
 ## Procedencia y créditos
 
-Proyecto mantenido por Joshua Mero en un repositorio independiente. La estructura inicial proviene de [FuentesElkin/Dashboard](https://github.com/FuentesElkin/Dashboard); el desarrollo posterior completa las guías de la asignatura. Se conserva este reconocimiento al iniciar un historial independiente. La implementación de esta actualización contó con asistencia de Codex.
+La implementación de esta actualización contó con asistencia de Codex.
 
 Guías de la asignatura: [08](https://dawm3.readthedocs.io/es/latest/recursos/guias/guia08.html), [09](https://dawm3.readthedocs.io/es/latest/recursos/guias/guia09.html), [10](https://dawm3.readthedocs.io/es/latest/recursos/guias/guia10.html), [11](https://dawm3.readthedocs.io/es/latest/recursos/guias/guia11.html).
 
