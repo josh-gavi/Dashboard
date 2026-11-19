@@ -1,0 +1,8 @@
+{
+  "name": "Dashboard DAWM",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-24-bookworm",
+  "forwardPorts": [5173],
+  "portsAttributes": { "5173": { "label": "Dashboard del Clima", "onAutoForward": "notify" } },
+  "postCreateCommand": "npm ci",
+  "customizations": { "vscode": { "extensions": ["dbaeumer.vscode-eslint"] } }
+}
