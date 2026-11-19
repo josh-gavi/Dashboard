@@ -65,3 +65,9 @@ Las comprobaciones de interacción visual requieren un navegador. No se presenta
 ## Ajuste de fidelidad a la guía
 
 La presentación se ajustó al App de la solución final de la guía 11 (páginas 23 y 24), al HeaderUI de la guía 08 y al IndicatorUI de la guía 10. Se retiraron Container, Paper, el pie personalizado, los textos agregados, el tema de colores, los bordes personalizados, los colores de series y el título agregado sobre la tabla. Se conservaron las dimensiones, los textos, la paginación y la distribución especificados por las guías. La alerta conserva el texto estático «No se prevén lluvias» del ejercicio. Las columnas de la tabla usan 160 px cada una. No hay botón de reintento ni tema personalizado en la interfaz; la cancelación y validación de respuestas permanecen como protección interna.
+
+## Comparación directa con el resultado de Elkin
+
+La referencia definitiva es https://fuenteselkin.github.io/Dashboard/ y el código de FuentesElkin/Dashboard en el commit `0fc2e055e4934041305651560b3a307ef43f77ce`. Se conservaron ambas alertas de la guía 08, incluida «Índice UV alto» con severity warning y variant filled, que la referencia mantiene al completar la guía 11.
+
+Se verificó igualdad del JavaScript de presentación generado por TypeScript para App, main, HeaderUI, AlertUI, SelectorUI, IndicatorUI, ChartUI y TableUI, además de igualdad de App.css e index.css. La única adaptación de tipos en ChartUI y TableUI permite valores nulos de la API y no altera el JavaScript generado. También se descargaron los CSS publicados de ambas aplicaciones y resultaron idénticos. La consulta conserva su validación y cancelación internas. Esta comprobación de archivos no sustituye una inspección visual en navegador.
