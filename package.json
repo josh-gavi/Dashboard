@@ -3,19 +3,25 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://FuentesElkin.github.io/dashboard",
+  "homepage": "https://josh-gavi.github.io/Dashboard/",
+  "engines": { "node": ">=24" },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "test": "node --test tests/*.test.mjs",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh workflow run deploy.yml --ref main",
+    "predeploy:legacy": "npm run build",
+    "deploy:legacy": "gh-pages -d dist --no-history"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^9.5.0",
+    "@mui/x-charts": "^9.18.1",
+    "@mui/x-data-grid": "^9.18.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },
