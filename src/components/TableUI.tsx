@@ -9,18 +9,40 @@ interface TableUIProps {
     header2: string;
 }
 
+function combineArrays(arrLabels: Array<string>, arrValues1: Array<number | null>, arrValues2: Array<number | null>) {
+    return arrLabels.map((label, index) => ({
+        id: index,
+        label: label,
+        value1: arrValues1[index],
+        value2: arrValues2[index],
+    }));
+}
+
 export default function TableUI({ labels, values1, values2, header1, header2 }: TableUIProps) {
+
     const columns: GridColDef[] = [
         { field: 'label', headerName: 'Hora', width: 160 },
         { field: 'value1', headerName: header1, width: 160 },
         { field: 'value2', headerName: header2, width: 160 },
     ];
-    const rows = labels.map((label, index) => ({ id: index, label, value1: values1[index], value2: values2[index] }));
+
+    const rows = combineArrays(labels, values1, values2);
+
     return (
         <Box sx={{ height: 350, width: '100%' }}>
-            <DataGrid rows={rows} columns={columns} aria-label="Pronóstico por hora"
-                initialState={{ pagination: { paginationModel: { pageSize: 5 } } }}
-                pageSizeOptions={[5]} disableRowSelectionOnClick />
+            <DataGrid
+                rows={rows}
+                columns={columns}
+                initialState={{
+                    pagination: {
+                        paginationModel: {
+                            pageSize: 5,
+                        },
+                    },
+                }}
+                pageSizeOptions={[5]}
+                disableRowSelectionOnClick
+            />
         </Box>
     );
 }
