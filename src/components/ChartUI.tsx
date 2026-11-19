@@ -12,13 +12,13 @@ interface ChartUIProps {
 
 export default function ChartUI({ title, labels, values1, values2, label1, label2 }: ChartUIProps) {
     return <>
-        <Typography variant="h6" component="h2" sx={{ px: 2, pt: 2 }}>{title}</Typography>
-        <LineChart height={350}
+        <Typography variant="h5" component="div">{title}</Typography>
+        <LineChart height={300}
             series={[
-                { data: values1, label: label1, color: '#1565c0', showMark: false },
-                { data: values2, label: label2, color: '#b45309', showMark: false },
+                { data: values1, label: label1 },
+                { data: values2, label: label2 },
             ]}
-            xAxis={[{ scaleType: 'point', data: labels, label: 'Hora local (UTC-5)' }]}
+            xAxis={[{ scaleType: 'point', data: labels }]}
         />
     </>;
 }
