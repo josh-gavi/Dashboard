@@ -1,75 +1,77 @@
-# React + TypeScript + Vite
+﻿# Dashboard del Clima
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Dashboard de Joshua Mero para Desarrollo de Aplicaciones Web y Móviles. Implementación de las guías 08, 09, 10 y 11 con React, TypeScript, Vite, Material UI y MUI X.
 
-Currently, two official plugins are available:
+**Aplicación:** https://josh-gavi.github.io/Dashboard/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Repositorio:** https://github.com/josh-gavi/Dashboard
 
-## React Compiler
+## Funcionalidades
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Selección de Guayaquil, Quito, Manta y Cuenca con eventos y `useState`.
+- Consulta real a Open-Meteo mediante el hook personalizado `useFetchData` y `useEffect`.
+- Indicadores de temperatura a 2 m, temperatura aparente, viento y humedad relativa.
+- Gráfico de líneas y tabla paginada de temperatura y viento por hora con MUI X Community.
+- Comunicación hijo → padre mediante `onOptionSelect`; datos del padre → hijos mediante props tipadas.
+- Indicador de carga, errores HTTP o de conexión y botón para reintentar.
+- Cancelación de consultas anteriores al cambiar de ciudad; nunca se presentan datos de otra ciudad como actuales.
+- Diseño responsivo. El gráfico y la tabla se ocultan por debajo de 900 px, como establece la guía 08.
 
-## Expanding the ESLint configuration
+## Desarrollo local y Codespaces
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Requiere Node.js 24 o superior. Codespaces instala las dependencias con la configuración de `.devcontainer`.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```sh
+npm ci
+npm run dev -- --host 0.0.0.0
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Abre el puerto 5173 y la ruta `/Dashboard/`. Las coordenadas, variables y zona horaria se configuran en `src/utils/weather.ts`. No se necesita clave de API.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```sh
+npm run lint
+npm test
+npm run build
+npm run preview -- --host 0.0.0.0
 ```
+
+En Windows PowerShell con restricciones de scripts se puede usar `npm.cmd`.
+
+## Publicación en GitHub Pages
+
+Cada actualización de `main` ejecuta `.github/workflows/deploy.yml`: instalación reproducible, lint, pruebas, compilación y despliegue en GitHub Pages. Los pull requests ejecutan la validación sin publicar.
+
+En **Settings → Pages → Build and deployment**, la fuente es **GitHub Actions**. También se puede publicar desde **Actions → Validar y desplegar dashboard → Run workflow**.
+
+Desde Codespaces con GitHub CLI autenticado:
+
+```sh
+npm run deploy
+```
+
+Ese comando compila localmente y solicita el workflow de publicación de `main`; publica el código que ya está guardado en GitHub. Primero confirma y sube tus cambios. La publicación usa la ruta `/Dashboard/`, respetando las mayúsculas del repositorio.
+
+El comando original de la guía se conserva como `npm run deploy:legacy`: genera la rama `gh-pages`. Solo debe usarse si se cambia explícitamente la fuente de Pages a **Deploy from a branch → gh-pages → / (root)**. El flujo activo de esta entrega es GitHub Actions.
+
+## Organización
+
+| Archivo | Responsabilidad |
+| --- | --- |
+| `src/App.tsx` | Estado compartido de ciudad y distribución de los componentes |
+| `src/components/SelectorUI.tsx` | Selección controlada, evento `onChange` y callback al padre |
+| `src/components/IndicatorUI.tsx` | Tarjeta reutilizable con título y valor |
+| `src/components/ChartUI.tsx` | Dos series horarias en `LineChart` |
+| `src/components/TableUI.tsx` | Las mismas series en `DataGrid`, cinco filas por página |
+| `src/hooks/useFetchData.ts` | Consulta, carga, errores, cancelación y reintento |
+| `src/types/DashboardTypes.ts` | Interfaces de datos actuales, unidades y series por hora |
+| `src/utils/weather.ts` | Coordenadas, URL y validación de la respuesta |
+
+El detalle de las etapas, decisiones y comprobaciones está en [docs/desarrollo.md](docs/desarrollo.md).
+
+## Procedencia y créditos
+
+Proyecto mantenido por Joshua Mero en un repositorio independiente. La estructura inicial proviene de [FuentesElkin/Dashboard](https://github.com/FuentesElkin/Dashboard); el desarrollo posterior completa las guías de la asignatura. Se conserva este reconocimiento al iniciar un historial independiente. La implementación de esta actualización contó con asistencia de Codex.
+
+Guías de la asignatura: [08](https://dawm3.readthedocs.io/es/latest/recursos/guias/guia08.html), [09](https://dawm3.readthedocs.io/es/latest/recursos/guias/guia09.html), [10](https://dawm3.readthedocs.io/es/latest/recursos/guias/guia10.html), [11](https://dawm3.readthedocs.io/es/latest/recursos/guias/guia11.html).
+
+Datos meteorológicos: [Open-Meteo](https://open-meteo.com/), con atribución según [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Componentes: [Material UI](https://mui.com/material-ui/) y [MUI X Community](https://mui.com/x/).
