@@ -66,7 +66,7 @@ El comando original de la guía se conserva como `npm run deploy:legacy`: genera
 | `src/types/DashboardTypes.ts` | Interfaces de datos actuales, unidades y series por hora |
 | `src/utils/weather.ts` | Coordenadas, URL y validación de la respuesta |
 
-La presentación conserva el ejemplo final de la guía 11: encabezado h2, Grid con espaciado de 5, cuatro tarjetas, gráfico de 300 px y tabla de 350 px. Se restauraron los estilos de la base inicial y se retiraron el tema personalizado y los textos adicionales. La alerta «No se prevén lluvias» es el texto estático del ejercicio, no una conclusión calculada con la API.
+La presentación usa como referencia directa [el resultado de Elkin](https://fuenteselkin.github.io/Dashboard/): encabezado h2, Grid con espaciado de 5, cuatro tarjetas, gráfico de 300 px y tabla de 350 px. Conserva las dos alertas de la guía 08: «No se prevén lluvias» e «Índice UV alto». Son textos estáticos del ejercicio, no conclusiones calculadas con la API. Los estilos, la composición y los componentes de presentación se compararon con el código de esa referencia.
 
 El detalle de las etapas, decisiones y comprobaciones está en [docs/desarrollo.md](docs/desarrollo.md).
 
